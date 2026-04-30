@@ -236,4 +236,4 @@ init.d                       qemu-ga
 # e que rotinas de dispositivo traduziam comandos.
 # Em qual diretório do Linux você reconhece essa função?
 
-Resposta:
+Resposta: O diretório /dev representa essa função, pois nele o Linux trata os dispositivos de entrada e saída como arquivos. Assim, o sistema operacional controla e intermedia o acesso ao hardware, assim como o antigo supervisor fazia ao gerenciar as operações de I/O e traduzir comandos para os dispositivos.
