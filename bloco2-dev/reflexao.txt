@@ -1,20 +1,18 @@
-# Atividades 5 e 6 — Questões de síntese
+# Atividades 6 — Questão de síntese
 # Preencha este arquivo durante e após as atividades.
 # ─────────────────────────────────────────────────────
 
-# ATIVIDADE 5 — O shell como JCL moderno
+# ATIVIDADE 6 — O shell como JCL moderno
 
 # O slide da genealogia mostrou que o JCL usava comandos como
-# // ASSIGN SYS004,TAPE para associar um trabalho a um dispositivo.
+# // ASSIGN SYS004,TAPE para associar um job a um dispositivo.
 # No shell moderno, qual mecanismo cumpre papel equivalente?
-# Dê um exemplo concreto do que você usou nesta atividade.
 
 Resposta:
 
-
 # ─────────────────────────────────────────────────────
 
-# ATIVIDADE 6 — Make
+# ATIVIDADE 7 — Make
 
 # 1. O monitor histórico verificava a conclusão de cada job antes
 #    de despachar o próximo. No make, qual mecanismo cumpre esse
