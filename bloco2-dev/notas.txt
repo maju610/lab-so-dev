@@ -5,8 +5,8 @@
 # FASE 1 — Pré-processador (gcc -E)
 # Quantas linhas tem soma.i? O que o pré-processador expandiu?
 
-Linhas em soma.i:
-Observação:
+Linhas em soma.i: 757
+Observação: O pré-processador expandiu principalmente a diretiva #include <stdio.h>, inserindo no arquivo todo o conteúdo necessário da biblioteca padrão da linguagem C. Ele também processou macros, removeu comentários do código e adicionou algumas definições internas usadas pelo compilador.
 
 
 # FASE 2 — Assembly (gcc -S)
@@ -14,29 +14,56 @@ Observação:
 # interessantes e explique o que cada uma faz.
 
 Trecho de soma.s:
+addi    sp,sp,-32
+sd      s0,24(sp)
+addi    s0,sp,32
+lw      a4,-20(s0)
+lw      a5,-24(s0)
+addw    a5,a4,a5
+mv      a0,a5
+jr      ra
 
 Explicação:
+addi sp,sp,-32 : Reserva 32 bytes na pilha para uso da função. O registrador sp (stack pointer) é ajustado para criar espaço para variáveis locais e salvamento de registradores.
+sd s0,24(sp) : Salva o registrador s0 na pilha. O comando sd significa store doubleword (armazenar 64 bits).
+addi s0,sp,32 : Define s0 como ponteiro de base do frame da função, facilitando o acesso às variáveis locais na pilha.
+lw a4,-20(s0) : Carrega da pilha para o registrador a4 o primeiro valor passado para a função. lw significa load word.
+lw a5,-24(s0) : Carrega o segundo valor armazenado na pilha para o registrador a5.
+addw a5,a4,a5 : Soma os valores de a4 e a5. O resultado é armazenado em a5.
+mv a0,a5 : Move o resultado da soma para a0, registrador usado para retorno de funções na arquitetura RISC-V.
+jr ra : Retorna da função usando o endereço armazenado em ra (return address).
 
 
 # FASE 3 — Código objeto (gcc -c)
 # Cole a saída de: file soma.o
 
-file soma.o:
+file soma.o: soma.o: ELF 64-bit LSB relocatable, UCB RISC-V, version 1 (SYSV), not stripped
 
 # Cole a saída de: nm soma.o
 
-nm soma.o:
+nm soma.o: 
+0000000000000000 r .LC0
+0000000000000028 T main
+                 U printf
+0000000000000000 T soma
 
 # Quais símbolos aparecem? O que significa o marcador "U" ao lado
-# de printf?
+# de printf? 
 
-Observação sobre nm:
+Observação sobre nm: 
+.LC0 : Símbolo local contendo a string "%d\n" usada pelo printf.
+main : Função principal do programa.
+soma : Função criada no código para realizar a soma.
+printf : Função da biblioteca padrão C utilizada para imprimir o resultado.
+T (Text section) : Indica que o símbolo está definido na seção de código executável do arquivo objeto.
+r : Indica um símbolo em uma seção somente leitura (read-only), normalmente dados constantes.
+U (Undefined) : Significa que o símbolo ainda não foi definido neste arquivo objeto.
 
 
 # FASE 4 — Ligação (gcc soma.o -o soma)
 # O que mudou após a ligação? Execute ./soma e registre a saída.
 
-Saída de ./soma:
+Saída de ./soma: 12
 
 
 # QUESTÕES DE SÍNTESE
@@ -45,10 +72,10 @@ Saída de ./soma:
 #    apresentação esse mesmo problema apareceu? O que o ligador
 #    faz com esse símbolo?
 
-Resposta 1:
+Resposta 1: O printf aparece como “U” (undefined) porque é uma função externa, não definida em soma.o. Nos slides de linkedição, isso também aparece como símbolo externo não resolvido. O ligador resolve isso conectando o programa à biblioteca padrão C (libc) e substituindo o símbolo pelo endereço real da função.
 
 
 # 2. Compare soma.i com soma.s: qual das duas saídas é análoga
 #    ao "código objeto" do montador histórico? Justifique.
 
-Resposta 2:
+Resposta 2: O soma.s é o mais parecido com o código objeto do montador histórico, pois já está em assembly e será convertido em .o pelo montador. Já o soma.i ainda é código C pré-processado, mais distante do nível de máquina.
