@@ -9,8 +9,8 @@
 # No shell moderno, qual mecanismo cumpre papel equivalente?
 
 Resposta:
-
-# ─────────────────────────────────────────────────────
+No shell moderno, o papel equivalente ao comando // ASSIGN SYS004,TAPE do JCL é feito pelo redirecionamento de entrada e saída e pela associação de arquivos/dispositivos através do sistema operacional.
+Exemplos são os operadores >, <, >> e os pipes |, que conectam programas, arquivos e dispositivos de forma semelhante ao JCL.
 
 # ATIVIDADE 7 — Make
 
@@ -20,10 +20,13 @@ Resposta:
 #    que não mudou?
 
 Resposta 1:
-
+No make, esse papel é cumprido pelo mecanismo de dependências e pela verificação de timestamps (data e hora de modificação dos arquivos).
+O make compara o arquivo fonte com o arquivo gerado. Se o arquivo compilado já estiver mais recente que o código-fonte, ele entende que não houve mudanças e não recompila.
 
 # 2. O monitor unificava "supervisor, carregador e rotinas de I/O
 #    sob uma interface textual". O que o Makefile unifica no fluxo
 #    de desenvolvimento moderno?
 
 Resposta 2:
+O Makefile unifica o processo de compilação, execução de comandos, gerenciamento de dependências e automação do projeto em um único fluxo textual.
+Assim como o monitor histórico centralizava supervisor, carregador e rotinas de I/O, o Makefile centraliza as etapas do desenvolvimento moderno, organizando tudo em comandos automatizados.
