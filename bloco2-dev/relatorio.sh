@@ -22,4 +22,8 @@ echo "--- Processos em execucao ---"
 ps aux | wc -l
 echo
 
+echo "--- Espaco em Disco ---"
+df -h
+echo
+
 echo "=== FIM DO RELATORIO ==="
