@@ -13,6 +13,14 @@ soma.o: soma.c
 	$(CC) $(CFLAGS) -c soma.c -o soma.o
 
 clean:
-	rm -f soma soma.o soma.i soma.s
+	rm -f soma soma.o soma.i soma.s relatorio_build.txt
 
-.PHONY: clean
+relatorio:
+	bash relatorio.sh > relatorio_build.txt
+	@echo "Relatorio gerado."
+
+# Regra extra opcional
+asm:
+	gcc -S soma.c -o soma.s
+
+.PHONY: clean relatorio asm
